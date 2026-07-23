@@ -1,0 +1,18 @@
+{
+  "name": "ctp-platanar-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend mínimo para CTP Platanar",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.21.2",
+    "mysql2": "^3.23.1",
+    "sequelize": "^6.37.8"
+  }
+}
