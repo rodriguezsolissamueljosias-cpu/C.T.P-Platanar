@@ -15,10 +15,5 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.0"
-  },
-  "dependencies": {
-    "mysql2": "^3.23.1",
-    "sequelize": "^6.37.8",
-    "serverless-http": "^4.0.0"
   }
 }

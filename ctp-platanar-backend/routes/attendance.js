@@ -5,32 +5,31 @@ const Attendance = require('../models/Attendance');
 // Crear registro de asistencia
 router.post('/', async (req, res) => {
   try {
-    const attendance = await Attendance.create(req.body);
+    const attendance = new Attendance(req.body);
+    await attendance.save();
     res.json(attendance);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
-// Obtener todos los registros de asistencia
+// Obtener todos los registros
 router.get('/', async (req, res) => {
   try {
-    const attendances = await Attendance.findAll();
-    res.json(attendances);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const records = await Attendance.find().populate('studentId');
+    res.json(records);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
-// Actualizar asistencia por ID
+// Actualizar asistencia
 router.put('/:id', async (req, res) => {
   try {
-    const attendance = await Attendance.findByPk(req.params.id);
-    if (!attendance) return res.status(404).json({ error: 'Asistencia no encontrada' });
-    await attendance.update(req.body);
-    res.json(attendance);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const updated = await Attendance.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 

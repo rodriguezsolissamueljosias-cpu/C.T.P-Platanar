@@ -1,18 +1,17 @@
-const { Sequelize } = require('sequelize');
-const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-dotenv.config();
-
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
-    port: process.env.DB_PORT || 3306,
-    logging: false,
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log('✅ Conexión a MongoDB Atlas establecida correctamente.');
+  } catch (error) {
+    console.error('❌ Error al conectar con MongoDB Atlas:', error.message);
+    process.exit(1);
   }
-);
+};
 
-module.exports = sequelize;
+module.exports = connectDB;

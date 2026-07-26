@@ -1,33 +1,28 @@
+// server.js - Backend principal con MongoDB Atlas
 const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const sequelize = require('./db');
+const connectDB = require('./db');
+require('dotenv').config();
 
-const studentRoutes = require('./routes/Student.js');
-const teacherRoutes = require('./routes/Teacher.js');
-const attendanceRoutes = require('./routes/Attendance.js');
-
-dotenv.config();
 const app = express();
 
-app.use(cors());
+// Conectar a MongoDB Atlas
+connectDB();
+
+// Middleware para parsear JSON
 app.use(express.json());
 
-app.use('/api/students', studentRoutes);
-app.use('/api/teachers', teacherRoutes);
-app.use('/api/attendance', attendanceRoutes);
+// Rutas API (asegúrate que la carpeta "routes" está en la raíz del backend)
+app.use('/api/teachers', require('./routes/teachers'));
+app.use('/api/students', require('./routes/students'));
+app.use('/api/attendance', require('./routes/attendance'));
 
+// Ruta de verificación (health check)
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'Servidor funcionando correctamente' });
 });
 
-sequelize.authenticate()
-  .then(() => {
-    console.log('✅ Conexión a la base de datos establecida.');
-    return sequelize.sync({ alter: true }); // no borra datos
-  })
-  .then(() => console.log('✅ Modelos sincronizados.'))
-  .catch(err => console.error('❌ Error DB:', err));
-
+// Iniciar servidor
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Backend en http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`🚀 Backend corriendo en http://localhost:${PORT}`);
+});

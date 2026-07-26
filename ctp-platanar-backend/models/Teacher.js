@@ -1,14 +1,12 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../db');
+const mongoose = require('mongoose');
 
-const Teacher = sequelize.define('Teacher', {
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  teacherId: { type: DataTypes.STRING, unique: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  phone: { type: DataTypes.STRING },
-  email: { type: DataTypes.STRING, unique: true },
-  password: { type: DataTypes.STRING }, // aquí puedes usar bcrypt para encriptar
-  subject: { type: DataTypes.STRING }
-}, { tableName: 'Teachers' });
+const TeacherSchema = new mongoose.Schema({
+  teacherId: { type: String, unique: true, required: true },
+  name: { type: String, required: true },
+  phone: { type: String },
+  email: { type: String, unique: true, required: true },
+  password: { type: String, required: true },
+  subject: { type: String }
+}, { timestamps: true });
 
-module.exports = Teacher;
+module.exports = mongoose.model('Teacher', TeacherSchema);
