@@ -1,6 +1,7 @@
 {
   "version": 2,
   "builds": [
+<<<<<<< HEAD
     { "src": "ctp-platanar-frontend/package.json", "use": "@vercel/static-build", "config": { "distDir": "build" } },
     { "src": "ctp-platanar-backend/package.json", "use": "@vercel/node" }
   ],
@@ -24,10 +25,15 @@
     },
     {
       "src": "api/index.js",
+=======
+    {
+      "src": "server.js",
+>>>>>>> fe11daa1fac5f4aacda236c2646c66085d923849
       "use": "@vercel/node"
     }
   ],
   "routes": [
+<<<<<<< HEAD
     {
       "src": "/api/(.*)",
       "dest": "api/index.js"
@@ -36,5 +42,10 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
+=======
+    { "src": "/health", "dest": "server.js" },
+    { "src": "/api/(.*)", "dest": "server.js" },
+    { "src": "/(.*)", "dest": "server.js" }
+>>>>>>> fe11daa1fac5f4aacda236c2646c66085d923849
   ]
 }

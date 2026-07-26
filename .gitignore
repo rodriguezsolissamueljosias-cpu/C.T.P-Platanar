@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Node.js
 node_modules/
 npm-debug.log*
@@ -18,3 +19,6 @@ package-lock.json
 
 # Git repos embebidos
 ctp-platanar-/
+=======
+*node_modules/
+>>>>>>> fe11daa1fac5f4aacda236c2646c66085d923849
