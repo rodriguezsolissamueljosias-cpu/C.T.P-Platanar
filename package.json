@@ -1,37 +1,20 @@
 {
-<<<<<<< HEAD
   "name": "ctp-platanar",
   "version": "1.0.0",
+  "private": true,
   "description": "CTP Platanar - Sistema de Asistencia Web",
   "scripts": {
-    "install-deps": "npm install && cd ctp-platanar-backend && npm install && cd ../ctp-platanar-frontend && npm install",
-    "backend": "cd ctp-platanar-backend && npm start",
-    "backend:dev": "cd ctp-platanar-backend && npm run dev",
-    "frontend": "cd ctp-platanar-frontend && npm start",
-    "start": "node scripts/start-dev.js",
-    "dev": "node scripts/start-dev.js",
-    "build-frontend": "cd ctp-platanar-frontend && npm run build",
-    "build": "npm run build-frontend",
-    "clean": "rmdir /s /q ctp-platanar-frontend\\build 2>nul; exit /b 0"
+    "install-deps": "npm install && npm install --prefix ctp-platanar-backend && npm install --prefix ctp-platanar-frontend",
+    "backend": "npm start --prefix ctp-platanar-backend",
+    "backend:dev": "npm run dev --prefix ctp-platanar-backend",
+    "backend:dev-local": "npm run dev:local --prefix ctp-platanar-backend",
+    "frontend": "npm start --prefix ctp-platanar-frontend",
+    "dev": "concurrently \"npm:backend:dev\" \"npm:frontend\"",
+    "dev:local": "concurrently \"npm:backend:dev-local\" \"npm:frontend\"",
+    "seed": "npm run seed --prefix ctp-platanar-backend",
+    "build": "npm run build --prefix ctp-platanar-frontend"
   },
   "devDependencies": {
     "concurrently": "^8.2.0"
-=======
-  "name": "ctp-platanar-backend",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Backend mínimo para CTP Platanar",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.6",
-    "dotenv": "^16.3.1",
-    "express": "^4.21.2",
-    "mysql2": "^3.23.1",
-    "sequelize": "^6.37.8"
->>>>>>> fe11daa1fac5f4aacda236c2646c66085d923849
   }
 }

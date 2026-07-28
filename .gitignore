@@ -1,24 +1,22 @@
-<<<<<<< HEAD
 # Node.js
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# React build
-ctp-platanar-frontend/build/
-
-# Backend build
-ctp-platanar-backend/build/
-
 # Environment variables
 .env
+.env.local
+*.env.local
 
-# Lock files (opcional, si no quieres subirlos)
-package-lock.json
+# Build outputs
+ctp-platanar-frontend/build/
+ctp-platanar-backend/build/
 
-# Git repos embebidos
-ctp-platanar-/
-=======
-*node_modules/
->>>>>>> fe11daa1fac5f4aacda236c2646c66085d923849
+# Vercel
+.vercel/
+
+# Misc
+.DS_Store
+coverage/
+*.log

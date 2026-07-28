@@ -9,6 +9,18 @@ const apiClient = axios.create({
   }
 });
 
+apiClient.interceptors.request.use((config) => {
+  try {
+    const teacher = JSON.parse(localStorage.getItem('teacher') || 'null');
+    if (teacher?.token) {
+      config.headers.Authorization = `Bearer ${teacher.token}`;
+    }
+  } catch (error) {
+    // localStorage corrupto o no disponible: continuar sin token
+  }
+  return config;
+});
+
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -59,6 +71,12 @@ export const sectionAPI = {
   getAll: () => apiClient.get('/sections'),
   create: (data) => apiClient.post('/sections', data),
   delete: (id) => apiClient.delete(`/sections/${id}`)
+};
+
+// ==================== PARENT PORTAL ====================
+export const parentAPI = {
+  register: (data) => apiClient.post('/parents/register', data),
+  getPortal: (parentId) => apiClient.get(`/parents/${parentId}`)
 };
 
 export default apiClient;

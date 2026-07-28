@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { parentAPI } from '../utils/api';
 
 export default function ParentPortal() {
   const parentLink = typeof window !== 'undefined' ? `${window.location.origin}/portal-padres` : '/portal-padres';
@@ -31,7 +31,7 @@ export default function ParentPortal() {
   const registerParent = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/parents/register', { firstName, lastName, children });
+      const res = await parentAPI.register({ firstName, lastName, children });
       setParentId(res.data.id);
       setMessage('✅ Registro creado correctamente.');
       setPortal(res.data);
@@ -43,7 +43,7 @@ export default function ParentPortal() {
   const loadPortal = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(`/api/parents/${parentId}`);
+      const res = await parentAPI.getPortal(parentId);
       setPortal(res.data);
       setMessage('✅ Portal cargado.');
     } catch (err) {

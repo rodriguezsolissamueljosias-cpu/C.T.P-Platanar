@@ -72,7 +72,7 @@ export default function StudentsDashboard({ teacher, setSection, section }) {
 
   useEffect(() => {
     const fetchTeachers = async () => {
-      if (!teacher?.role === 'admin') return;
+      if (teacher?.role !== 'admin') return;
       try {
         const res = await teacherAPI.getAll();
         setTeachers(res.data || []);
