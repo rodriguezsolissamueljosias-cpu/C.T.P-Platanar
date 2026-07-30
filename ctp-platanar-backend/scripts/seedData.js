@@ -22,9 +22,9 @@ async function seedDatabase() {
 
   const adminPassword = await bcrypt.hash('admin123', 10);
   await Teacher.create({
-    firstName: 'Ana',
-    lastName: 'Ramírez',
-    email: 'admin@ctpplatanar.edu.cr',
+    firstName: 'Samuel',
+    lastName: 'Rodriguez',
+    email: 'rodriguezsolissamueljosias@gmail.com',
     phone: '8888-0000',
     password: adminPassword,
     subject: 'Matemática',
